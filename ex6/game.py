@@ -246,15 +246,16 @@ def execute_take(item_id,current_room,inventory):
     there is no such item in the room, this function prints
     "You cannot take that."
     """
-    item_id = [item['id'] for item in current_room['items']].index(item_id)
-    if check_mass(inventory,current_room['items'][item_id]):
-        try:
+    try:
+        item_id = [item['id'] for item in current_room['items']].index(item_id)
+        if check_mass(inventory,current_room['items'][item_id]):
+        
             inventory.append(current_room['items'].pop(item_id))
-        except ValueError:
+        
+        else:
+            print('That would be too heavy')
+    except ValueError:
             print('You cannot take that')
-    else:
-        print('That would be too heavy')
-    
     return current_room,inventory
     
 
@@ -266,6 +267,7 @@ def execute_drop(item_id,current_room,inventory,score):
     try:
         current_room['items'].append(inventory.pop([item['id'] for item in inventory].index(item_id)))
         if item_id in current_room['objectives']:
+            print('You sorced a point!')
             current_room['items'].pop()
             score += 1
     except ValueError :
@@ -346,10 +348,9 @@ def move(exits, direction):
 
 
 # This is the entry point of our program
-def main():
-    current_room = rooms["Reception"]
-    inventory = [item_id, item_laptop, item_money]
-    score = 0
+def main(current_room,inventory,score):
+    
+
     # Main game loop
     while score < 5:
         # Display game status (room description, inventory etc.)
@@ -368,5 +369,5 @@ def main():
 # '__main__' is the name of the scope in which top-level code executes.
 # See https://docs.python.org/3.4/library/__main__.html for explanation
 if __name__ == "__main__":
-    main()
+    main(current_room,inventory,score)
 
