@@ -179,11 +179,10 @@ def menu(exits):
         print_menu(exits)
         user_input = input()
         user_input = normalise_input(user_input).split()[-1]
-        print('dsfsdfdsf',user_input)
         if is_valid_exit(exits,user_input):
-            print('valid')
-            break
-    return user_input
+            
+            return user_input
+   
 
         # COMPLETE THIS PART:
         
@@ -229,7 +228,7 @@ def main():
 
         # Show the menu with exits and ask the player
         direction = menu(exits)
-        print('fsadf',direction)
+
         # Move the protagonist, i.e. update the current room
         current_room = move(exits, direction)
 
