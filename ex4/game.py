@@ -177,8 +177,14 @@ def menu(exits):
     # Repeat until the player enter a valid choice
     while True:
         print_menu(exits)
-        direction = input()
-        return direction
+        user_input = input()
+        user_input = normalise_input(user_input).split()[-1]
+        print('dsfsdfdsf',user_input)
+        if is_valid_exit(exits,user_input):
+            print('valid')
+            break
+    return user_input
+
         # COMPLETE THIS PART:
         
         # Display menu
@@ -223,7 +229,7 @@ def main():
 
         # Show the menu with exits and ask the player
         direction = menu(exits)
-
+        print('fsadf',direction)
         # Move the protagonist, i.e. update the current room
         current_room = move(exits, direction)
 
